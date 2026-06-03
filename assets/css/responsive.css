@@ -1,0 +1,158 @@
+/* ============================================================
+   assets/css/responsive.css — Mobile-first responsive rules
+   ============================================================ */
+
+/* ── Large desktop (1400px+) ──────────────────────────────── */
+@media (min-width: 1400px) {
+  .dashboard-grid { grid-template-columns: repeat(4, 1fr); }
+  .main-inner     { padding: 28px 32px; }
+}
+
+/* ── Desktop (1200–1399px) ────────────────────────────────── */
+@media (max-width: 1399px) {
+  .dashboard-grid   { grid-template-columns: repeat(4, 1fr); }
+  .dashboard-grid-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ── Tablet landscape (992–1199px) ───────────────────────── */
+@media (max-width: 1199px) {
+  :root { --sidebar-w: 220px; }
+  .dashboard-grid   { grid-template-columns: repeat(3, 1fr); }
+  .dashboard-grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .dashboard-grid-2 { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── Tablet portrait (768–991px) ─────────────────────────── */
+@media (max-width: 991px) {
+  :root { --sidebar-w: 0px; }
+
+  /* Sidebar becomes an off-canvas drawer */
+  .sidebar {
+    transform: translateX(-260px);
+    width: 260px !important;
+    box-shadow: var(--shadow-xl);
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  .sidebar-overlay.active { display: block; }
+
+  /* Main content takes full width */
+  #mainContent {
+    margin-left: 0 !important;
+  }
+  .top-navbar {
+    left: 0 !important;
+  }
+
+  .dashboard-grid   { grid-template-columns: repeat(2, 1fr); }
+  .dashboard-grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .dashboard-grid-2 { grid-template-columns: 1fr; }
+
+  .welcome-banner { padding: 20px; }
+  .welcome-title  { font-size: 18px; }
+  .welcome-icon   { display: none; }
+
+  .notif-dropdown { width: 300px; }
+}
+
+/* ── Mobile (< 768px) ─────────────────────────────────────── */
+@media (max-width: 767px) {
+  .main-inner { padding: 16px; }
+
+  .dashboard-grid   { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .dashboard-grid-3 { grid-template-columns: 1fr; }
+  .dashboard-grid-2 { grid-template-columns: 1fr; }
+
+  .stat-card { padding: 14px; }
+  .stat-value { font-size: 20px; }
+  .stat-icon  { width: 42px; height: 42px; font-size: 18px; }
+
+  .page-header { flex-direction: column; align-items: flex-start; }
+  .page-header h1 { font-size: 18px; }
+
+  .top-navbar { padding: 0 14px; }
+  .navbar-title { font-size: 14px; }
+
+  .chart-card { padding: 14px; }
+
+  /* Hide some nav text on mobile */
+  .user-details { display: none !important; }
+
+  /* Stack doctor cards */
+  .doctor-card { padding: 16px; }
+
+  /* Table horizontal scroll */
+  .table-responsive-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--radius);
+  }
+
+  /* Modal full-screen on mobile */
+  .modal-dialog { margin: 0 !important; max-width: 100% !important; }
+  .modal-content { border-radius: 0 !important; min-height: 100vh; }
+
+  /* Toast full width */
+  .toast-container { padding: 8px !important; }
+  .hms-toast { min-width: calc(100vw - 16px); }
+}
+
+/* ── Small mobile (< 480px) ───────────────────────────────── */
+@media (max-width: 479px) {
+  .dashboard-grid { grid-template-columns: 1fr; }
+  .stat-card.hide-xs { display: none; }
+  .page-header .btn-group { width: 100%; }
+  .page-header .btn-group .btn { flex: 1; }
+}
+
+/* ── Print styles ─────────────────────────────────────────── */
+@media print {
+  .sidebar, .top-navbar, .no-print,
+  .sidebar-overlay, .toast-container,
+  .page-loader, #themeToggle { display: none !important; }
+
+  #mainContent {
+    margin-left: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  .card, .chart-card, .stat-card {
+    box-shadow: none !important;
+    border: 1px solid #ddd !important;
+    break-inside: avoid;
+  }
+
+  body { background: #fff !important; color: #000 !important; }
+  .badge { border: 1px solid #999; }
+
+  @page { margin: 1.5cm; }
+}
+
+/* ── Collapsed sidebar (desktop toggle) ──────────────────── */
+body.sidebar-collapsed .sidebar {
+  width: var(--sidebar-collapsed);
+}
+body.sidebar-collapsed .sidebar .nav-label,
+body.sidebar-collapsed .sidebar .brand-text,
+body.sidebar-collapsed .sidebar .user-info,
+body.sidebar-collapsed .sidebar .nav-section-title,
+body.sidebar-collapsed .sidebar .logout-btn span {
+  display: none;
+}
+body.sidebar-collapsed .sidebar .nav-link {
+  justify-content: center;
+  padding: 10px;
+}
+body.sidebar-collapsed .sidebar .sidebar-user {
+  justify-content: center;
+}
+body.sidebar-collapsed #mainContent {
+  margin-left: var(--sidebar-collapsed);
+}
+body.sidebar-collapsed .top-navbar {
+  left: var(--sidebar-collapsed);
+}
+body.sidebar-collapsed .sidebar .brand-logo {
+  margin: 0 auto;
+}
